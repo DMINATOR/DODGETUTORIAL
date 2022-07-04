@@ -22,12 +22,25 @@ public class Main : Node
     {
         GetNode<Timer>("MobTimer").Stop();
         GetNode<Timer>("ScoreTimer").Stop();
+
+        GetNode<HUD>("HUD").ShowGameOver();
     }
 
     public void NewGame()
     {
         Score = 0;
 
+        // kill all mobs
+        // Note that for calling Godot-provided methods with strings,
+        // we have to use the original Godot snake_case name.
+        GetTree().CallGroup("mobs", "queue_free");
+
+        // Update HUD
+        var hud = GetNode<HUD>("HUD");
+        hud.UpdateScore(Score);
+        hud.ShowMessage("Get Ready!");
+
+        // Start game
         var player = GetNode<Player>("Player");
         var startPosition = GetNode<Position2D>("StartPosition");
         player.Start(startPosition.Position);
@@ -38,6 +51,8 @@ public class Main : Node
     public void OnScoreTimerTimeout()
     {
         Score++;
+
+        GetNode<HUD>("HUD").UpdateScore(Score);
     }
 
     public void OnStartTimerTimeout()
