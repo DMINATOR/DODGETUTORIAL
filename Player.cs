@@ -63,6 +63,15 @@ public class Player : Area2D
         );
 
         // Update animation
+        if (velocity.x != 0)
+        {
+            animatedSprite.Animation = "walk";
+        }
+        else if (velocity.y != 0)
+        {
+            animatedSprite.Animation = "up";
+        }
+
         if (velocity.x < 0)
         {
             animatedSprite.FlipH = true;
