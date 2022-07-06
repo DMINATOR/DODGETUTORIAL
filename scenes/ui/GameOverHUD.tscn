@@ -9,6 +9,9 @@ font_data = ExtResource( 1 )
 
 [node name="GameOverHUD" type="CanvasLayer"]
 script = ExtResource( 2 )
+__meta__ = {
+"_editor_description_": "Shows Game Over screen"
+}
 
 [node name="ScoreLabel" type="Label" parent="."]
 anchor_right = 1.0

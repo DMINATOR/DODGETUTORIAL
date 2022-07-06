@@ -5,18 +5,12 @@ public class GameplayHUD : CanvasLayer
 {
     private Label _scoreLabel;
 
-    [Export]
-    public int Score;
-
     public override void _Ready()
     {
         _scoreLabel = GetNode<Label>("ScoreLabel");
     }
-
-    public void OnScoreTimerTimeout()
+    public void UpdateScore(int score)
     {
-        Score++;
-
-        _scoreLabel.Text = Score.ToString();
+        _scoreLabel.Text = score.ToString();
     }
 }
