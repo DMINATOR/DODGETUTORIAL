@@ -24,6 +24,9 @@ public class Main : Node
         GetNode<Timer>("ScoreTimer").Stop();
 
         GetNode<HUD>("HUD").ShowGameOver();
+
+        GetNode<AudioStreamPlayer>("Audio/Music").Stop();
+        GetNode<AudioStreamPlayer>("Audio/DeathSound").Play();
     }
 
     public void NewGame()
@@ -46,6 +49,9 @@ public class Main : Node
         player.Start(startPosition.Position);
 
         GetNode<Timer>("StartTimer").Start();
+
+        // Play music
+        GetNode<AudioStreamPlayer>("Audio/Music").Play();
     }
 
     public void OnScoreTimerTimeout()
