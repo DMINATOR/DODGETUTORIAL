@@ -27,15 +27,6 @@ autoplay = true
 [node name="DeathSound" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 3 )
 
-[node name="MobTimer" type="Timer" parent="."]
-wait_time = 0.5
-
-[node name="ScoreTimer" type="Timer" parent="."]
-
-[node name="StartTimer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
 [node name="Actors" type="Node" parent="."]
 
 [node name="Player" parent="Actors" instance=ExtResource( 4 )]
@@ -47,3 +38,21 @@ curve = SubResource( 1 )
 
 [node name="StartPosition" type="Position2D" parent="Actors"]
 position = Vector2( 240, 450 )
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="MobTimer" type="Timer" parent="Timers"]
+wait_time = 0.5
+
+[node name="ScoreTimer" type="Timer" parent="Timers"]
+autostart = true
+__meta__ = {
+"_editor_description_": "1. Increases score every second by 1
+2. Updates GameplayHUD"
+}
+
+[node name="StartTimer" type="Timer" parent="Timers"]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="Timers/ScoreTimer" to="." method="OnScoreTimerTimeout"]
