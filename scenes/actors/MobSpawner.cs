@@ -16,6 +16,8 @@ public class MobSpawner : Node
 
         _mobSpawnLocation = GetNode<PathFollow2D>("MobPath/MobSpawnLocation");
         _mobSpawnTimer = GetNode<Timer>("MobTimer");
+
+        StartSpawningMobs();
     }
 
     public void StartSpawningMobs()

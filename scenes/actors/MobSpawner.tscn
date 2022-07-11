@@ -22,3 +22,5 @@ curve = SubResource( 1 )
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
+
+[connection signal="timeout" from="MobTimer" to="." method="OnMobTimerTimeout"]
