@@ -46,7 +46,7 @@ public class Main : Node
         // Start game
         var player = GetNode<Player>("Player");
         var startPosition = GetNode<Position2D>("StartPosition");
-        player.Start(startPosition.Position);
+        //player.Start(startPosition.Position);
 
         GetNode<Timer>("StartTimer").Start();
 

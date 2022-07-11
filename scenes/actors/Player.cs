@@ -8,6 +8,11 @@ public class Player : Area2D
 
     public Vector2 ScreenSize; // Size of the game window.
 
+    private AnimatedSprite _animatedSprited;
+    private Position2D _startPosition2D;
+    private AudioStreamPlayer _audioDeathSound;
+    private CollisionShape2D _collisionShape2D;
+
     [Signal]
     public delegate void Hit();
 
@@ -15,8 +20,12 @@ public class Player : Area2D
     {
         ScreenSize = GetViewportRect().Size;
 
-        // Hide player
-        Hide();
+        _animatedSprited = GetNode<AnimatedSprite>("AnimatedSprite");
+        _startPosition2D = GetNode<Position2D>("StartPosition");
+        _audioDeathSound = GetNode<AudioStreamPlayer>("Audio/DeathSound");
+        _collisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
+
+        Position = _startPosition2D.Position;
     }
 
     public override void _Process(float delta)
@@ -43,16 +52,14 @@ public class Player : Area2D
             velocity.y -= 1;
         }
 
-        var animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
-
         if (velocity.Length() > 0)
         {
             velocity = velocity.Normalized() * Speed;
-            animatedSprite.Play();
+            _animatedSprited.Play();
         }
         else
         {
-            animatedSprite.Stop();
+            _animatedSprited.Stop();
         }
 
         // Change
@@ -65,45 +72,50 @@ public class Player : Area2D
         // Update animation
         if (velocity.x != 0)
         {
-            animatedSprite.Animation = "walk";
+            _animatedSprited.Animation = "walk";
         }
         else if (velocity.y != 0)
         {
-            animatedSprite.Animation = "up";
+            _animatedSprited.Animation = "up";
         }
 
         if (velocity.x < 0)
         {
-            animatedSprite.FlipH = true;
+            _animatedSprited.FlipH = true;
         }
         else
         {
-            animatedSprite.FlipH = false;
+            _animatedSprited.FlipH = false;
         }
 
         if (velocity.y > 0)
         {
-            animatedSprite.FlipV = true;
+            _animatedSprited.FlipV = true;
         }
         else
         {
-            animatedSprite.FlipV = false;
+            _animatedSprited.FlipV = false;
         }
     }
 
     public void OnPlayerBodyEntered(PhysicsBody2D body)
     {
-        Hide(); // Player disappears after being hit.
+        // Play hit
+        _audioDeathSound.Play();
+
         EmitSignal(nameof(Hit));
 
         // Must be deferred as we can't change physics properties on a physics callback.
-        GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", true);
+        _collisionShape2D.SetDeferred("disabled", true);
+
+        // Must be deferred as we can't change physics properties on a physics callback.
+        //GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", true);
     }
 
-    public void Start(Vector2 pos)
-    {
-        Position = pos;
-        Show();
-        GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
-    }
+    //public void Start(Vector2 pos)
+    //{
+    //    Position = pos;
+    //    Show();
+    //    GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
+    //}
 }
