@@ -12,6 +12,13 @@
 script = ExtResource( 5 )
 MobScene = ExtResource( 6 )
 
+[node name="ScoreTimer" type="Timer" parent="."]
+autostart = true
+__meta__ = {
+"_editor_description_": "1. Increases score every second by 1
+2. Updates GameplayHUD"
+}
+
 [node name="GameplayHUD" parent="." instance=ExtResource( 1 )]
 
 [node name="Audio" type="Node" parent="."]
@@ -29,16 +36,7 @@ position = Vector2( 240, 450 )
 
 [node name="MobSpawner" parent="Actors" instance=ExtResource( 7 )]
 
-[node name="Timers" type="Node" parent="."]
-
-[node name="ScoreTimer" type="Timer" parent="Timers"]
-autostart = true
-__meta__ = {
-"_editor_description_": "1. Increases score every second by 1
-2. Updates GameplayHUD"
-}
-
 [node name="SceneManager" parent="." instance=ExtResource( 3 )]
 
+[connection signal="timeout" from="ScoreTimer" to="." method="OnScoreTimerTimeout"]
 [connection signal="Hit" from="Actors/Player" to="." method="OnPlayerHit"]
-[connection signal="timeout" from="Timers/ScoreTimer" to="." method="OnScoreTimerTimeout"]

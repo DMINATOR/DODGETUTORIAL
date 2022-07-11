@@ -103,19 +103,12 @@ public class Player : Area2D
         // Play hit
         _audioDeathSound.Play();
 
+        // Hide player
+        Hide();
+
         EmitSignal(nameof(Hit));
 
         // Must be deferred as we can't change physics properties on a physics callback.
         _collisionShape2D.SetDeferred("disabled", true);
-
-        // Must be deferred as we can't change physics properties on a physics callback.
-        //GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", true);
     }
-
-    //public void Start(Vector2 pos)
-    //{
-    //    Position = pos;
-    //    Show();
-    //    GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
-    //}
 }

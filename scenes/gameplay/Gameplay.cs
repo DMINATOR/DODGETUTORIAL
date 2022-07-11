@@ -12,10 +12,13 @@ public class Gameplay : Node
 
     private SceneManager _sceneManager;
 
+    private Timer _scoreTimer;
+
     public override void _Ready()
     {
         _gameplayHUD = GetNode<GameplayHUD>("GameplayHUD");
         _sceneManager = GetNode<SceneManager>("SceneManager");
+        _scoreTimer = GetNode<Timer>("ScoreTimer");
     }
 
     public void OnScoreTimerTimeout()
@@ -27,6 +30,8 @@ public class Gameplay : Node
 
     public void OnPlayerHit()
     {
+        _scoreTimer.Stop();
+
         _sceneManager.GameOver();
     }
 }
