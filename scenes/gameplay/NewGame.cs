@@ -3,11 +3,15 @@ using System;
 
 public class NewGame : Node
 {
-    [Export]
-    public PackedScene GameplayScene;
+    private SceneManager _sceneManager;
+
+    public override void _Ready()
+    {
+        _sceneManager = GetNode<SceneManager>("SceneManager");
+    }
 
     public void OnStartGameButtonPressed()
     {
-        GetTree().ChangeSceneTo(GameplayScene);
+        _sceneManager.Gameplay();
     }
 }

@@ -6,16 +6,16 @@ public class Gameplay : Node
     [Export]
     public PackedScene MobScene;
 
-    [Export]
-    public PackedScene GameoverScene;
-
     public int Score;
 
     private GameplayHUD _gameplayHUD;
 
+    private SceneManager _sceneManager;
+
     public override void _Ready()
     {
         _gameplayHUD = GetNode<GameplayHUD>("GameplayHUD");
+        _sceneManager = GetNode<SceneManager>("SceneManager");
     }
 
     public void OnScoreTimerTimeout()
@@ -27,7 +27,6 @@ public class Gameplay : Node
 
     public void OnPlayerHit()
     {
-        // Game ends when player hits
-        GetTree().ChangeSceneTo(GameoverScene);
+        _sceneManager.GameOver();
     }
 }
