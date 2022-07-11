@@ -30,8 +30,9 @@ public class Gameplay : Node
 
     public void OnPlayerHit()
     {
+        // Stop counting score
         _scoreTimer.Stop();
 
-        _sceneManager.GameOver();
+        _sceneManager.GameOver(Score);
     }
 }

@@ -12,9 +12,19 @@ public class SceneManager : Node
     [Export]
     public string NewGameScene;
 
-    public void GameOver()
+    public void GameOver(int score)
     {
-        GetTree().ChangeScene(GameoverScene);
+        var nextScene = (PackedScene)GD.Load(GameoverScene);
+        // nextScene.NativeInstance
+        var gameOverScene = nextScene.Instance<Gameover>();
+        gameOverScene.SetScore(score);
+
+        GetTree().ChangeSceneTo(nextScene);
+
+        //var nextScene = ResourceLoader.Load<Gameover>(GameoverScene);
+        //nextScene.SetScore(score);
+
+        //GetTree().ChangeSceneTo(nextScene);
     }
 
     public void Gameplay()
