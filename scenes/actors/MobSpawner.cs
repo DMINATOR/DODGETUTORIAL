@@ -12,6 +12,8 @@ public class MobSpawner : Node
 
     public override void _Ready()
     {
+        GD.Randomize();
+
         base._Ready();
 
         _mobSpawnLocation = GetNode<PathFollow2D>("MobPath/MobSpawnLocation");
