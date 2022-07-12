@@ -15,6 +15,9 @@ public class GameOverHUD : CanvasLayer
 
         _startButton = GetNode<Button>("StartButton");
         _scoreLabel = GetNode<Label>("ScoreLabel");
+
+        if (_startButton == null) throw new Exception($"{nameof(_startButton)} is null!");
+        if (_scoreLabel == null) throw new Exception($"{nameof(_scoreLabel)} is null!");
     }
 
     public void OnStartButtonPressed()

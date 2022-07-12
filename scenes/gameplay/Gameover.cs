@@ -10,10 +10,19 @@ public class Gameover : Node
     {
         _sceneManager = GetNode<SceneManager>("SceneManager");
         _gameOverHUD = GetNode<GameOverHUD>("GameOverHUD");
+
+        if (_sceneManager == null) throw new Exception($"{nameof(_sceneManager)} is null!");
+        if (_gameOverHUD == null) throw new Exception($"{nameof(_gameOverHUD)} is null!");
+
+        GD.Print($"_Ready");
     }
 
     public void SetScore(int score)
     {
+        GD.Print($"setscore = {score}, {_gameOverHUD}");
+
+        if (_gameOverHUD == null) throw new Exception($"{nameof(_gameOverHUD)} is null!");
+
         _gameOverHUD.SetScore(score);
     }
 
