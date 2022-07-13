@@ -10,14 +10,11 @@ public class Gameplay : Node
 
     private GameplayHUD _gameplayHUD;
 
-    private SceneManager _sceneManager;
-
     private Timer _scoreTimer;
 
     public override void _Ready()
     {
         _gameplayHUD = GetNode<GameplayHUD>("GameplayHUD");
-        _sceneManager = GetNode<SceneManager>("SceneManager");
         _scoreTimer = GetNode<Timer>("ScoreTimer");
 
         // Reset score
@@ -36,6 +33,6 @@ public class Gameplay : Node
         // Stop counting score
         _scoreTimer.Stop();
 
-        _sceneManager.GameOver();
+        this.GetGlobalSceneManager().GameOver();
     }
 }

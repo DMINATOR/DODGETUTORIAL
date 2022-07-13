@@ -17,6 +17,7 @@ config/icon="res://icon.png"
 [autoload]
 
 GlobalGameState="*res://autoLoad/GlobalGameState.cs"
+GlobalSceneManager="*res://autoLoad/GlobalSceneManager.tscn"
 
 [display]
 
