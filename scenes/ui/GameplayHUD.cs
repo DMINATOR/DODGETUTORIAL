@@ -9,8 +9,8 @@ public class GameplayHUD : CanvasLayer
     {
         _scoreLabel = GetNode<Label>("ScoreLabel");
     }
-    public void UpdateScore(int score)
+    public void UpdateScore()
     {
-        _scoreLabel.Text = score.ToString();
+        _scoreLabel.Text = GlobalGameState.Score.ToString();
     }
 }

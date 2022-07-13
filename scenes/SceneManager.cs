@@ -20,16 +20,16 @@ public class SceneManager : Node
         _gameoverScene = GD.Load<PackedScene>(GameoverScene);
     }
 
-    public void GameOver(int score)
+    public void GameOver()
     {
         // Create new instance
-        var gameOverScene = _gameoverScene.Instance<Gameover>();
+        //var gameOverScene = _gameoverScene.Instance<Gameover>();
 
         // Init manually
-        gameOverScene._Ready();
+        //gameOverScene._Ready();
 
         // Set score
-        gameOverScene.SetScore(score);
+        //gameOverScene.SetScore(score);
 
         //gameOverScene.CallDeferred(nameof(Gameover.SetScore), score); // deferred
 

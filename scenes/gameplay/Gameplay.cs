@@ -19,13 +19,16 @@ public class Gameplay : Node
         _gameplayHUD = GetNode<GameplayHUD>("GameplayHUD");
         _sceneManager = GetNode<SceneManager>("SceneManager");
         _scoreTimer = GetNode<Timer>("ScoreTimer");
+
+        // Reset score
+        GlobalGameState.Score = 0;
     }
 
     public void OnScoreTimerTimeout()
     {
-        Score++;
+        GlobalGameState.Score++;
 
-        _gameplayHUD.UpdateScore(Score);
+        _gameplayHUD.UpdateScore();
     }
 
     public void OnPlayerHit()
@@ -33,6 +36,6 @@ public class Gameplay : Node
         // Stop counting score
         _scoreTimer.Stop();
 
-        _sceneManager.GameOver(Score);
+        _sceneManager.GameOver();
     }
 }

@@ -7,17 +7,22 @@ public class GameOverHUD : CanvasLayer
     public delegate void StartGameButtonPressed();
 
     private Button _startButton;
-    private Label _scoreLabel;
+    //private Label _scoreLabel;
+
+    public Label ScoreLabel => GetNode<Label>("ScoreLabel");
 
     public override void _Ready()
     {
         base._Ready();
 
         _startButton = GetNode<Button>("StartButton");
-        _scoreLabel = GetNode<Label>("ScoreLabel");
+        //_scoreLabel = GetNode<Label>("ScoreLabel");
 
-        if (_startButton == null) throw new Exception($"{nameof(_startButton)} is null!");
-        if (_scoreLabel == null) throw new Exception($"{nameof(_scoreLabel)} is null!");
+        //if (_startButton == null) throw new Exception($"{nameof(_startButton)} is null!");
+        //if (_scoreLabel == null) throw new Exception($"{nameof(_scoreLabel)} is null!");
+
+        //GD.Print($"ready = {ScoreLabel.Text}, {this.GetHashCode()}");
+        ScoreLabel.Text = GlobalGameState.Score.ToString();
     }
 
     public void OnStartButtonPressed()
@@ -25,8 +30,9 @@ public class GameOverHUD : CanvasLayer
         EmitSignal(nameof(StartGameButtonPressed));
     }
 
-    public void SetScore(int score)
-    {
-        _scoreLabel.Text = score.ToString();
-    }
+    //public void SetScore(int score)
+    //{
+    //    GD.Print($"setscoreh = {score}, {this.GetHashCode()}");
+    //    ScoreLabel.Text = "XXX";// score.ToString();
+    //}
 }
