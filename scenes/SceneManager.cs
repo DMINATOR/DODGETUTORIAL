@@ -22,25 +22,7 @@ public class SceneManager : Node
 
     public void GameOver()
     {
-        // Create new instance
-        //var gameOverScene = _gameoverScene.Instance<Gameover>();
-
-        // Init manually
-        //gameOverScene._Ready();
-
-        // Set score
-        //gameOverScene.SetScore(score);
-
-        //gameOverScene.CallDeferred(nameof(Gameover.SetScore), score); // deferred
-
         GetTree().ChangeSceneTo(_gameoverScene);
-
-        //gameOverScene.SetScore(score);
-
-        //var nextScene = ResourceLoader.Load<Gameover>(GameoverScene);
-        //nextScene.SetScore(score);
-
-        //GetTree().ChangeSceneTo(nextScene);
     }
 
     public void Gameplay()
