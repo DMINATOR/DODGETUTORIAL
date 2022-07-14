@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/AfterlifeByAlexanderNakarada.mp3-5ace9b3d1a53682a93ab10aa68f44e5e.mp3str"
+
+[deps]
+
+source_file="res://art/AfterlifeByAlexanderNakarada.mp3"
+dest_files=[ "res://.import/AfterlifeByAlexanderNakarada.mp3-5ace9b3d1a53682a93ab10aa68f44e5e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
