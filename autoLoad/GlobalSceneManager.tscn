@@ -1,12 +1,15 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://autoLoad/GlobalSceneManager.cs" type="Script" id=1]
+[ext_resource path="res://scenes/gameplay/NewGame.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/gameplay/Gameplay.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/gameplay/Gameover.tscn" type="PackedScene" id=4]
 
 [node name="Node" type="Node"]
 script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": "Switches between scenes"
 }
-GameoverScene = "res://scenes/gameplay/Gameover.tscn"
-GameplayScene = "res://scenes/gameplay/Gameplay.tscn"
-NewGameScene = "res://scenes/gameplay/NewGame.tscn"
+GameoverScene = ExtResource( 4 )
+GameplayScene = ExtResource( 3 )
+NewGameScene = ExtResource( 2 )

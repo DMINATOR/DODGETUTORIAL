@@ -5,27 +5,27 @@ using System;
 public class GlobalSceneManager : Node
 {
     [Export]
-    public string GameoverScene;
+    public PackedScene GameoverScene;
 
     [Export]
-    public string GameplayScene;
+    public PackedScene GameplayScene;
 
     [Export]
-    public string NewGameScene;
+    public PackedScene NewGameScene;
 
     public void GameOver()
     {
-        GetTree().ChangeScene(GameoverScene);
+        GetTree().ChangeSceneTo(GameoverScene);
     }
 
     public void Gameplay()
     {
-        GetTree().ChangeScene(GameplayScene);
+        GetTree().ChangeSceneTo(GameplayScene);
     }
 
     public void NewGame()
     {
-        GetTree().ChangeScene(NewGameScene);
+        GetTree().ChangeSceneTo(NewGameScene);
     }
 }
 
