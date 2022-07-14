@@ -27,8 +27,6 @@ public class GlobalSceneManager : Node
     {
         GetTree().ChangeScene(NewGameScene);
     }
-
-   
 }
 
 public static class GlobalSceneManagerExtensions
