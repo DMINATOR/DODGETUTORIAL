@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+// Define Scene as AutoLoader for this to work
 public class GlobalSceneManager : Node
 {
     [Export]
