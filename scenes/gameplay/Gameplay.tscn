@@ -10,6 +10,7 @@
 [node name="Gameplay" type="Node"]
 script = ExtResource( 5 )
 MobScene = ExtResource( 6 )
+Music = ExtResource( 2 )
 
 [node name="ScoreTimer" type="Timer" parent="."]
 autostart = true
@@ -24,7 +25,6 @@ __meta__ = {
 
 [node name="Music" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 2 )
-autoplay = true
 
 [node name="Actors" type="Node" parent="."]
 
