@@ -18,7 +18,7 @@ config/icon="res://icon.png"
 
 GlobalGameState="*res://autoLoad/GlobalGameState.cs"
 GlobalSceneManager="*res://autoLoad/GlobalSceneManager.tscn"
-GlobalAudioManager="*res://autoLoad/GlobalAudioManager.cs"
+GlobalAudioManager="*res://autoLoad/GlobalAudioManager.tscn"
 
 [display]
 
