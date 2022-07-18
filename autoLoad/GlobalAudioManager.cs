@@ -34,13 +34,21 @@ public class GlobalAudioManager : Node
         {
             // Expire current music
             _expiredMusic.Add(_currentMusic);
+            _currentMusic.FadeOutAndPlay();
         }
 
         _currentMusic = AudioMusicScene.Instance<AudioMusic>();
+        _currentMusic.Connect(nameof(AudioMusic.OnFadeOut), this, nameof(OnAudioMusicFadeOutCallback));
+
         _musicFolder.AddChild(_currentMusic);
 
         // Start playing
         _currentMusic.FadeInAndPlay(audioStream);
+    }
+
+    public void OnAudioMusicFadeOutCallback(AudioMusicFadeOutMode fadeOutMode)
+    {
+        GD.Print($"called = {fadeOutMode}");
     }
 }
 

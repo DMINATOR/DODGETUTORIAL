@@ -8,3 +8,5 @@ script = ExtResource( 1 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="tween_all_completed" from="Tween" to="." method="OnTweenAllCompleted"]
