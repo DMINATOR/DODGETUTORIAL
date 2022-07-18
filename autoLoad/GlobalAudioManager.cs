@@ -23,9 +23,14 @@ public class GlobalAudioManager : Node
     // Timer to apply sounds effects
     Timer _musicFadeInOutTimer;
 
-    private const float MinVolume = -80;
-    private const float MaxVolume = 0;
-    private const float IncreaseByStep = 10;
+    [Export]
+    public float MinVolume = -80;
+
+    [Export]
+    public float MaxVolume = 0;
+
+    [Export]
+    public float FadeDuration = 3.0f;
 
     public override void _Ready()
     {
@@ -38,6 +43,11 @@ public class GlobalAudioManager : Node
     {
         var newMusic = CreateAudioStreamPlayer(audioStream);
         _music.AddChild(newMusic);
+
+        var tween = new Tween();
+        tween.InterpolateProperty(newMusic, "volume_db", MinVolume, MaxVolume, FadeDuration);
+        newMusic.AddChild(tween);
+        tween.Start();
 
         if ( _currentMusic != null )
         {
@@ -70,18 +80,18 @@ public class GlobalAudioManager : Node
         };
     }
 
-    public void MusicFadeInOutTimerTimeout()
-    {
-        // Increase current music volume
-        if( _currentMusic.VolumeDb < MaxVolume )
-        {
-            GD.Print($"Volume {_currentMusic.VolumeDb} -> +{IncreaseByStep}");
+    //public void MusicFadeInOutTimerTimeout()
+    //{
+    //    // Increase current music volume
+    //    if( _currentMusic.VolumeDb < MaxVolume )
+    //    {
+    //        GD.Print($"Volume {_currentMusic.VolumeDb} -> +{IncreaseByStep}");
 
-            _currentMusic.VolumeDb += IncreaseByStep;
-        }
+    //        _currentMusic.VolumeDb += IncreaseByStep;
+    //    }
 
-        CheckTimer();
-    }
+    //    CheckTimer();
+    //}
 }
 
 public static class GlobalAudioManagerExtensions

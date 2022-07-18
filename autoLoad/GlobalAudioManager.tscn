@@ -5,7 +5,7 @@
 [node name="GlobalAudioManager" type="Node"]
 script = ExtResource( 1 )
 __meta__ = {
-"_editor_description_": "Audiot manager, for playing music or sounds"
+"_editor_description_": "Audio manager, for playing music or sounds"
 }
 
 [node name="MusicFadeInOutTimer" type="Timer" parent="."]
@@ -17,5 +17,3 @@ __meta__ = {
 [node name="Music" type="Node" parent="."]
 
 [node name="Sounds" type="Node" parent="."]
-
-[connection signal="timeout" from="MusicFadeInOutTimer" to="." method="MusicFadeInOutTimerTimeout"]
