@@ -10,88 +10,38 @@ using System.Linq.Expressions;
 /// </summary>
 public class GlobalAudioManager : Node
 {
-    // Currently playing music
-    AudioStreamPlayer _currentMusic;
-
-    // Music that is expired and has to fade out
-    List<AudioStreamPlayer> _expiredMusic = new List<AudioStreamPlayer>();
-
     // Folders to store child nodes
-    Node _music;
-    Node _sounds;
-
-    // Timer to apply sounds effects
-    Timer _musicFadeInOutTimer;
+    Node _musicFolder;
+    Node _soundsFolder;
 
     [Export]
-    public float MinVolume = -80;
+    public PackedScene AudioMusicScene;
 
-    [Export]
-    public float MaxVolume = 0;
+    // Currently playing music
+    AudioMusic _currentMusic;
 
-    [Export]
-    public float FadeDuration = 3.0f;
+    List<AudioMusic> _expiredMusic = new List<AudioMusic>();
 
     public override void _Ready()
     {
-        _music = GetNode<Node>("Music");
-        _sounds = GetNode<Node>("Sounds");
-        _musicFadeInOutTimer = GetNode<Timer>("MusicFadeInOutTimer");
+        _musicFolder = GetNode<Node>("Music");
+        _soundsFolder = GetNode<Node>("Sounds");
     }
 
     public void PlayMusic(AudioStream audioStream)
     {
-        var newMusic = CreateAudioStreamPlayer(audioStream);
-        _music.AddChild(newMusic);
-
-        var tween = new Tween();
-        tween.InterpolateProperty(newMusic, "volume_db", MinVolume, MaxVolume, FadeDuration);
-        newMusic.AddChild(tween);
-        tween.Start();
-
         if ( _currentMusic != null )
         {
             // Expire current music
             _expiredMusic.Add(_currentMusic);
         }
 
+        _currentMusic = AudioMusicScene.Instance<AudioMusic>();
+        _musicFolder.AddChild(_currentMusic);
+
         // Start playing
-        _currentMusic = newMusic;
-        _currentMusic.VolumeDb = MinVolume;
-        _currentMusic.Play();
-
-        CheckTimer();
+        _currentMusic.FadeInAndPlay(audioStream);
     }
-
-    private void CheckTimer()
-    {
-        //var shouldPause = _expiredMusic.Count == 0 && _currentMusic == null;
-
-        //GD.Print($"Timer {_musicFadeInOutTimer.Paused} -> {shouldPause}");
-
-        //_musicFadeInOutTimer.Paused = shouldPause;
-    }
-
-    private AudioStreamPlayer CreateAudioStreamPlayer(AudioStream audioStream)
-    {
-        return new AudioStreamPlayer
-        {
-            Stream = audioStream
-        };
-    }
-
-    //public void MusicFadeInOutTimerTimeout()
-    //{
-    //    // Increase current music volume
-    //    if( _currentMusic.VolumeDb < MaxVolume )
-    //    {
-    //        GD.Print($"Volume {_currentMusic.VolumeDb} -> +{IncreaseByStep}");
-
-    //        _currentMusic.VolumeDb += IncreaseByStep;
-    //    }
-
-    //    CheckTimer();
-    //}
 }
 
 public static class GlobalAudioManagerExtensions
