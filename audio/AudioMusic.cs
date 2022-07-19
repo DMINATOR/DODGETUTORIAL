@@ -5,7 +5,7 @@ using System;
 public class AudioMusic : Node
 {
     [Signal]
-    public delegate void OnFadeOut(AudioMusicFadeOutMode fadeOutMode);
+    public delegate void OnFadeOut(AudioMusicFadeOutMode fadeOutMode, AudioMusic instance);
 
     [Export]
     public float MinVolume = -80;
@@ -54,7 +54,7 @@ public class AudioMusic : Node
         GD.Print("completed");
 
         // Trigger completed event:
-        EmitSignal(nameof(OnFadeOut), _audioMusicFadeOutMode);
+        EmitSignal(nameof(OnFadeOut), _audioMusicFadeOutMode, this);
     }
 }
 

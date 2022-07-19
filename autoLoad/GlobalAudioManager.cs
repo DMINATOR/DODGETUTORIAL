@@ -20,8 +20,6 @@ public class GlobalAudioManager : Node
     // Currently playing music
     AudioMusic _currentMusic;
 
-    List<AudioMusic> _expiredMusic = new List<AudioMusic>();
-
     public override void _Ready()
     {
         _musicFolder = GetNode<Node>("Music");
@@ -33,22 +31,26 @@ public class GlobalAudioManager : Node
         if ( _currentMusic != null )
         {
             // Expire current music
-            _expiredMusic.Add(_currentMusic);
             _currentMusic.FadeOutAndPlay();
         }
 
         _currentMusic = AudioMusicScene.Instance<AudioMusic>();
         _currentMusic.Connect(nameof(AudioMusic.OnFadeOut), this, nameof(OnAudioMusicFadeOutCallback));
 
+        // Add child
         _musicFolder.AddChild(_currentMusic);
 
         // Start playing
         _currentMusic.FadeInAndPlay(audioStream);
     }
 
-    public void OnAudioMusicFadeOutCallback(AudioMusicFadeOutMode fadeOutMode)
+    public void OnAudioMusicFadeOutCallback(AudioMusicFadeOutMode fadeOutMode, AudioMusic instance)
     {
-        GD.Print($"called = {fadeOutMode}");
+        // Remove expired music node only on fade out
+        if (fadeOutMode == AudioMusicFadeOutMode.FadeOut)
+        {
+            _musicFolder.RemoveChild(instance);
+        }
     }
 }
 
