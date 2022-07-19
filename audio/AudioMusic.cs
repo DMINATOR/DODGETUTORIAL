@@ -51,8 +51,6 @@ public class AudioMusic : Node
 
     public void OnTweenAllCompleted()
     {
-        GD.Print("completed");
-
         // Trigger completed event:
         EmitSignal(nameof(OnFadeOut), _audioMusicFadeOutMode, this);
     }

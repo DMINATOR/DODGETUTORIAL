@@ -48,6 +48,7 @@ public class GlobalAudioManager : Node
         if (fadeOutMode == AudioMusicFadeOutMode.FadeOut)
         {
             _musicFolder.RemoveChild(instance);
+            instance.QueueFree();
         }
     }
 }

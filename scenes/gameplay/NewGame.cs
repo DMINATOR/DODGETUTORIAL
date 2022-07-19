@@ -8,8 +8,6 @@ public class NewGame : Node
 
     public override void _Ready()
     {
-        //_music = GetNode<AudioStreamPlayer>("Audio/Music");
-
         // Start playing music
         this.GetGlobalAudioManager().PlayMusic(Music);
     }
