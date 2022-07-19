@@ -1,8 +1,4 @@
 using Godot;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 
 /// <summary>
 /// 
@@ -28,12 +24,14 @@ public class GlobalAudioManager : Node
 
     public void PlaySound(AudioStream audioStream)
     {
-        var newSound = new AudioStreamPlayer();
-        newSound.Stream = audioStream;
+        var newSound = new AudioStreamPlayer
+        {
+            Stream = audioStream
+        };
 
         // Add child
         _soundsFolder.AddChild(newSound);
-        newSound.Connect("finished", this, nameof(OnSoundFinishedPlaying));
+        newSound.Connect("finished", this, nameof(OnSoundFinishedPlaying), new Godot.Collections.Array { newSound });
         newSound.Play();
     }
 
@@ -65,9 +63,11 @@ public class GlobalAudioManager : Node
         }
     }
 
-    public void OnSoundFinishedPlaying()
+    public void OnSoundFinishedPlaying(AudioStreamPlayer player)
     {
-        GD.Print("finished");
+        // sound finished playing, discard it
+        _soundsFolder.RemoveChild(player);
+        player.QueueFree();
     }
 }
 
