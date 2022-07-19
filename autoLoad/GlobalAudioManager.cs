@@ -12,6 +12,7 @@ public class GlobalAudioManager : Node
 {
     // Folders to store child nodes
     Node _musicFolder;
+    Node _soundsFolder;
 
     [Export]
     public PackedScene AudioMusicScene;
@@ -22,6 +23,18 @@ public class GlobalAudioManager : Node
     public override void _Ready()
     {
         _musicFolder = GetNode<Node>("Music");
+        _soundsFolder = GetNode<Node>("Sounds");
+    }
+
+    public void PlaySound(AudioStream audioStream)
+    {
+        var newSound = new AudioStreamPlayer();
+        newSound.Stream = audioStream;
+
+        // Add child
+        _soundsFolder.AddChild(newSound);
+        newSound.Connect("finished", this, nameof(OnSoundFinishedPlaying));
+        newSound.Play();
     }
 
     public void PlayMusic(AudioStream audioStream)
@@ -50,6 +63,11 @@ public class GlobalAudioManager : Node
             _musicFolder.RemoveChild(instance);
             instance.QueueFree();
         }
+    }
+
+    public void OnSoundFinishedPlaying()
+    {
+        GD.Print("finished");
     }
 }
 

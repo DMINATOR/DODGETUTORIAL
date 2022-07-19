@@ -17,3 +17,5 @@ __meta__ = {
 }
 
 [node name="Music" type="Node" parent="."]
+
+[node name="Sounds" type="Node" parent="."]

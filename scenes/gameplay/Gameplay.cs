@@ -11,19 +11,16 @@ public class Gameplay : Node
 
     private GameplayHUD _gameplayHUD;
     private Timer _scoreTimer;
-    private AudioStreamPlayer _music;
 
     public override void _Ready()
     {
         _gameplayHUD = GetNode<GameplayHUD>("GameplayHUD");
         _scoreTimer = GetNode<Timer>("ScoreTimer");
-        _music = GetNode<AudioStreamPlayer>("Audio/Music");
 
         // Reset score
         GlobalGameState.Score = 0;
 
         // Start playing music
-        //this.GetGlobalAudioManager().PlayMusic(_music);
         this.GetGlobalAudioManager().PlayMusic(Music);
     }
 

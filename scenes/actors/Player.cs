@@ -6,11 +6,13 @@ public class Player : Area2D
     [Export]
     public int Speed = 400; // How fast the player will move (pixels/sec).
 
+    [Export]
+    public AudioStream PlayerDieSound;
+
     public Vector2 ScreenSize; // Size of the game window.
 
     private AnimatedSprite _animatedSprited;
     private Position2D _startPosition2D;
-    private AudioStreamPlayer _audioDeathSound;
     private CollisionShape2D _collisionShape2D;
 
     [Signal]
@@ -22,7 +24,6 @@ public class Player : Area2D
 
         _animatedSprited = GetNode<AnimatedSprite>("AnimatedSprite");
         _startPosition2D = GetNode<Position2D>("StartPosition");
-        _audioDeathSound = GetNode<AudioStreamPlayer>("Audio/DeathSound");
         _collisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
 
         Position = _startPosition2D.Position;
@@ -100,8 +101,7 @@ public class Player : Area2D
 
     public void OnPlayerBodyEntered(PhysicsBody2D body)
     {
-        // Play hit
-        _audioDeathSound.Play();
+        this.GetGlobalAudioManager().PlaySound(PlayerDieSound);
 
         // Hide player
         Hide();
