@@ -12,7 +12,6 @@ public class GlobalAudioManager : Node
 {
     // Folders to store child nodes
     Node _musicFolder;
-    Node _soundsFolder;
 
     [Export]
     public PackedScene AudioMusicScene;
@@ -23,7 +22,6 @@ public class GlobalAudioManager : Node
     public override void _Ready()
     {
         _musicFolder = GetNode<Node>("Music");
-        _soundsFolder = GetNode<Node>("Sounds");
     }
 
     public void PlayMusic(AudioStream audioStream)
