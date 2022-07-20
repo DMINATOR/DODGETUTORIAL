@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/ui/GameplayHUD.tscn" type="PackedScene" id=1]
 [ext_resource path="res://art/House In a Forest Loop.ogg" type="AudioStream" id=2]
+[ext_resource path="res://scenes/ui/OptionsHUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/actors/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/gameplay/Gameplay.cs" type="Script" id=5]
 [ext_resource path="res://scenes/actors/Mob.tscn" type="PackedScene" id=6]
@@ -32,7 +33,11 @@ position = Vector2( 240, 450 )
 
 [node name="HUD" type="Node" parent="."]
 
+[node name="OptionsHUD" parent="HUD" instance=ExtResource( 3 )]
+visible = false
+
 [node name="GameplayHUD" parent="HUD" instance=ExtResource( 1 )]
 
 [connection signal="timeout" from="Game/ScoreTimer" to="." method="OnScoreTimerTimeout"]
 [connection signal="Hit" from="Game/Actors/Player" to="." method="OnPlayerHit"]
+[connection signal="OnBackButtonPressed" from="HUD/OptionsHUD" to="." method="OnOptionsMenuBackButtonPressed"]
