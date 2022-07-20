@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class OptionsHUD : VBoxContainer
+public class OptionsHUD : Control
 {
     [Signal]
     public delegate void OnBackDelegate();
