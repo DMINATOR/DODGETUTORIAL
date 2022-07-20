@@ -32,6 +32,7 @@ public class AudioMusic : Node
     {
         _audioMusicFadeOutMode = AudioMusicFadeOutMode.FadeIn;
         _audioPlayer.Stream = audioStream;
+        _audioPlayer.VolumeDb = MinVolume;
 
         // From Min -> Max
         _tween.InterpolateProperty(_audioPlayer, "volume_db", MinVolume, MaxVolume, FadeDuration);

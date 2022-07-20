@@ -14,8 +14,8 @@ public class Gameplay : Node
 
     public override void _Ready()
     {
-        _gameplayHUD = GetNode<GameplayHUD>("GameplayHUD");
-        _scoreTimer = GetNode<Timer>("ScoreTimer");
+        _gameplayHUD = GetNode<GameplayHUD>("HUD/GameplayHUD");
+        _scoreTimer = GetNode<Timer>("Game/ScoreTimer");
 
         // Reset score
         GlobalGameState.Score = 0;
