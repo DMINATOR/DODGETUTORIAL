@@ -40,11 +40,13 @@ public class Gameplay : Node
         if (Input.IsActionPressed("ui_cancel"))
         {
             _optionsHUD.Visible = true;
+            _gameplayHUD.Visible = false;
         }
     }
 
-    public void OnOptionsMenuBackButtonPressed()
+    public void OnOptionsMenuBackDelegateCallback()
     {
+        _gameplayHUD.Visible = true;
         _optionsHUD.Visible = false;
     }
 

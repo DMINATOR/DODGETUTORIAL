@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class GameplayHUD : CanvasLayer
+public class GameplayHUD : VBoxContainer
 {
     private Label _scoreLabel;
 

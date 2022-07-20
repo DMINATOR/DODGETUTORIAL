@@ -40,4 +40,4 @@ visible = false
 
 [connection signal="timeout" from="Game/ScoreTimer" to="." method="OnScoreTimerTimeout"]
 [connection signal="Hit" from="Game/Actors/Player" to="." method="OnPlayerHit"]
-[connection signal="OnBackButtonPressed" from="HUD/OptionsHUD" to="." method="OnOptionsMenuBackButtonPressed"]
+[connection signal="OnBackDelegate" from="HUD/OptionsHUD" to="." method="OnOptionsMenuBackDelegateCallback"]
