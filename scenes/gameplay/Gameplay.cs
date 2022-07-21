@@ -39,6 +39,7 @@ public class Gameplay : Node
     {
         if (Input.IsActionPressed("ui_cancel"))
         {
+            GetTree().Paused = true;
             _optionsHUD.Visible = true;
             _gameplayHUD.Visible = false;
         }
@@ -48,6 +49,7 @@ public class Gameplay : Node
     {
         _gameplayHUD.Visible = true;
         _optionsHUD.Visible = false;
+        GetTree().Paused = false;
     }
 
     public void OnPlayerHit()
