@@ -79,3 +79,4 @@ min_value = -80.0
 max_value = 20.0
 
 [connection signal="pressed" from="BackButton" to="." method="OnBackButtonPressed"]
+[connection signal="value_changed" from="Panel/VBoxContainer/MusicSlider" to="." method="OnMusicSliderValueChanged"]

@@ -24,4 +24,11 @@ public class OptionsHUD : Control
         GetTree().Paused = false;
         EmitSignal(nameof(OnBackDelegate));
     }
+
+    public void OnMusicSliderValueChanged(float value)
+    {
+        GlobalGameState.PersistedData.MusicVolumeInDb = (int)value;
+
+        // Change actual music level
+    }
 }
