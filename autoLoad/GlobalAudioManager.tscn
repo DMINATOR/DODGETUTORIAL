@@ -17,5 +17,9 @@ __meta__ = {
 }
 
 [node name="Music" type="Node" parent="."]
+pause_mode = 2
+__meta__ = {
+"_editor_description_": "Music added here, this node never pauses."
+}
 
 [node name="Sounds" type="Node" parent="."]
