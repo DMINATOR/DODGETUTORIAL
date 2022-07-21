@@ -11,6 +11,6 @@ public class GameplayHUD : VBoxContainer
     }
     public void UpdateScore()
     {
-        _scoreLabel.Text = GlobalGameState.Score.ToString();
+        _scoreLabel.Text = GlobalGameState.GameplayData.Score.ToString();
     }
 }

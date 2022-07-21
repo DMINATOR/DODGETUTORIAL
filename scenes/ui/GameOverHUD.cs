@@ -16,7 +16,7 @@ public class GameOverHUD : CanvasLayer
         _startButton = GetNode<Button>("StartButton");
         _scoreLabel = GetNode<Label>("ScoreLabel");
 
-        _scoreLabel.Text = GlobalGameState.Score.ToString();
+        _scoreLabel.Text = GlobalGameState.GameplayData.Score.ToString();
     }
 
     public void OnStartButtonPressed()

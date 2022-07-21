@@ -22,7 +22,7 @@ public class Gameplay : Node
         _scoreTimer = GetNode<Timer>("Game/ScoreTimer");
 
         // Reset score
-        GlobalGameState.Score = 0;
+        GlobalGameState.GameplayData.Score = 0;
 
         // Start playing music
         this.GetGlobalAudioManager().PlayMusic(Music);
@@ -30,7 +30,7 @@ public class Gameplay : Node
 
     public void OnScoreTimerTimeout()
     {
-        GlobalGameState.Score++;
+        GlobalGameState.GameplayData.Score++;
 
         _gameplayHUD.UpdateScore();
     }
