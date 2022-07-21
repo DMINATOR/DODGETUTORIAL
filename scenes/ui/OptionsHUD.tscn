@@ -1,15 +1,24 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/ui/OptionsHUD.cs" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 64
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=1]
-size = 64
-font_data = ExtResource( 1 )
+[sub_resource type="BitmapFont" id=4]
+
+[sub_resource type="BitmapFont" id=5]
+height = 5.0
+
+[sub_resource type="Theme" id=3]
+Fonts/fonts/large = SubResource( 4 )
+Fonts/fonts/normal = SubResource( 5 )
 
 [node name="OptionsHUD" type="Control"]
 pause_mode = 2
@@ -22,6 +31,14 @@ __meta__ = {
 2. Allows settings to be changed"
 }
 
+[node name="BackButton" type="Button" parent="."]
+margin_left = 151.0
+margin_top = 636.0
+margin_right = 329.0
+margin_bottom = 720.0
+custom_fonts/font = SubResource( 1 )
+text = "Back"
+
 [node name="Message" type="Label" parent="."]
 margin_right = 480.0
 margin_bottom = 78.0
@@ -30,17 +47,33 @@ text = "Options"
 align = 1
 autowrap = true
 
-[node name="Container" type="CenterContainer" parent="."]
-anchor_top = 1.0
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -216.0
+margin_top = -184.0
+margin_right = 224.0
+margin_bottom = 184.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -84.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
 
-[node name="BackButton" type="Button" parent="Container"]
-margin_left = 151.0
-margin_right = 329.0
-margin_bottom = 84.0
-custom_fonts/font = SubResource( 1 )
-text = "Back"
+[node name="MusicLabel" type="Label" parent="Panel/VBoxContainer"]
+margin_right = 400.0
+margin_bottom = 14.0
+theme = SubResource( 3 )
+text = "Music"
 
-[connection signal="pressed" from="Container/BackButton" to="." method="OnBackButtonPressed"]
+[node name="MusicSlider" type="HSlider" parent="Panel/VBoxContainer"]
+margin_top = 18.0
+margin_right = 400.0
+margin_bottom = 34.0
+
+[connection signal="pressed" from="BackButton" to="." method="OnBackButtonPressed"]
