@@ -12,8 +12,8 @@ public class GlobalAudioManager : Node
     Node _musicFolder;
     Node _soundsFolder;
 
-    private int _musicAudioBus = 0;
-    private int _soundAudioBus = 1;
+    private int _musicAudioBus = 1;
+    private int _soundAudioBus = 2;
 
     [Export]
     public PackedScene AudioMusicScene;
@@ -36,11 +36,12 @@ public class GlobalAudioManager : Node
             GD.Print($"{nameof(GlobalAudioManager)}-{nameof(CreateAudio)} = {AudioServer.BusCount}");
 
             // first load
-            AudioServer.AddBus(0); // index = 0
-            AudioServer.SetBusName(_soundAudioBus, nameof(_soundAudioBus));
 
-            AudioServer.AddBus(0); // index = 1
+            AudioServer.AddBus(); // index = 1
             AudioServer.SetBusName(_musicAudioBus, nameof(_musicAudioBus));
+
+            AudioServer.AddBus(); // index = 2
+            AudioServer.SetBusName(_soundAudioBus, nameof(_soundAudioBus));
 
             GD.Print($"{nameof(GlobalAudioManager)}-{nameof(CreateAudio)} = {AudioServer.BusCount} DONE ");
         }
@@ -52,6 +53,7 @@ public class GlobalAudioManager : Node
         CreateAudio();
 
         GD.Print($"{nameof(GlobalAudioManager)}-Music = {AudioServer.GetBusVolumeDb(_musicAudioBus) } -> {data.MusicVolumeInDb}");
+        GD.Print($"{nameof(GlobalAudioManager)}-Sound = {AudioServer.GetBusVolumeDb(_soundAudioBus)} -> {data.SoundVolumeInDb}");
 
         AudioServer.SetBusVolumeDb(_musicAudioBus, data.MusicVolumeInDb);
         AudioServer.SetBusVolumeDb(_soundAudioBus, data.SoundVolumeInDb);

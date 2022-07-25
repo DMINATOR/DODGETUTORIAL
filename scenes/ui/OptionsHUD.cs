@@ -7,14 +7,17 @@ public class OptionsHUD : Control
     public delegate void OnBackDelegate();
 
     private HSlider _musicSlider;
+    private HSlider _soundlider;
 
     public override void _Ready()
     {
         base._Ready();
 
         _musicSlider = GetNode<HSlider>("Panel/VBoxContainer/MusicSlider");
-
         _musicSlider.Value = GlobalGameState.PersistedData.MusicVolumeInDb;
+
+        _soundlider = GetNode<HSlider>("Panel/VBoxContainer/SoundSlider");
+        _soundlider.Value = GlobalGameState.PersistedData.SoundVolumeInDb;
     }
 
     public void OnBackButtonPressed()
@@ -29,6 +32,14 @@ public class OptionsHUD : Control
     public void OnMusicSliderValueChanged(float value)
     {
         GlobalGameState.PersistedData.MusicVolumeInDb = (int)value;
+
+        // Change actual music level
+        this.GetGlobalAudioManager().UpdateAudioLevels(GlobalGameState.PersistedData);
+    }
+
+    public void OnSoundSliderValueChanged(float value)
+    {
+        GlobalGameState.PersistedData.SoundVolumeInDb = (int)value;
 
         // Change actual music level
         this.GetGlobalAudioManager().UpdateAudioLevels(GlobalGameState.PersistedData);

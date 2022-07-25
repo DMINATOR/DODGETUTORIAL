@@ -78,5 +78,20 @@ margin_bottom = 34.0
 min_value = -100.0
 max_value = 0.0
 
+[node name="SoundLabel" type="Label" parent="Panel/VBoxContainer"]
+margin_top = 38.0
+margin_right = 400.0
+margin_bottom = 52.0
+theme = SubResource( 3 )
+text = "Sound"
+
+[node name="SoundSlider" type="HSlider" parent="Panel/VBoxContainer"]
+margin_top = 56.0
+margin_right = 400.0
+margin_bottom = 72.0
+min_value = -100.0
+max_value = 0.0
+
 [connection signal="pressed" from="BackButton" to="." method="OnBackButtonPressed"]
 [connection signal="value_changed" from="Panel/VBoxContainer/MusicSlider" to="." method="OnMusicSliderValueChanged"]
+[connection signal="value_changed" from="Panel/VBoxContainer/SoundSlider" to="." method="OnSoundSliderValueChanged"]
