@@ -20,6 +20,7 @@ public class OptionsHUD : Control
     public void OnBackButtonPressed()
     {
         // Save changes
+        this.GetGlobalGameStateManager().SaveGame();
 
         GetTree().Paused = false;
         EmitSignal(nameof(OnBackDelegate));
@@ -30,5 +31,6 @@ public class OptionsHUD : Control
         GlobalGameState.PersistedData.MusicVolumeInDb = (int)value;
 
         // Change actual music level
+        this.GetGlobalAudioManager().UpdateAudioLevels(GlobalGameState.PersistedData);
     }
 }

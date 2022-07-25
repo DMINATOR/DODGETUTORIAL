@@ -28,10 +28,11 @@ public class AudioMusic : Node
         _tween = GetNode<Tween>("Tween");
     }
 
-    public void FadeInAndPlay(AudioStream audioStream)
+    public void FadeInAndPlay(AudioStream audioStream, string busName)
     {
         _audioMusicFadeOutMode = AudioMusicFadeOutMode.FadeIn;
         _audioPlayer.Stream = audioStream;
+        _audioPlayer.Bus = busName;
         _audioPlayer.VolumeDb = MinVolume;
 
         // From Min -> Max

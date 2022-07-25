@@ -15,16 +15,18 @@ public class GlobalGameStateManager : Node
 
     public void SaveGame()
     {
-        var saveGame = new File();
-        saveGame.Open("user://savegame.save", File.ModeFlags.Write);
+        //var saveGame = new File();
+        //saveGame.Open("user://savegame.save", File.ModeFlags.Write);
 
-        saveGame.StoreLine(JSON.Print(GlobalGameState.PersistedData));
+       //saveGame.StoreLine(JSON.Print(GlobalGameState.PersistedData));
 
-        saveGame.Close();
+       // saveGame.Close();
     }
 
     public void LoadGame()
     {
+        GD.Print("loaded");
+
         var saveGame = new File();
         if (!saveGame.FileExists("user://savegame.save"))
         {
@@ -65,6 +67,18 @@ public class GlobalGameStateManager : Node
         //    }
         //}
 
+        this.GetGlobalAudioManager().UpdateAudioLevels(GlobalGameState.PersistedData);
+
         saveGame.Close();
+    }
+}
+
+
+public static class GlobalGameStateManagerExtensions
+{
+    // Retrieves an instance of a audio manager
+    public static GlobalGameStateManager GetGlobalGameStateManager(this Node node)
+    {
+        return node.GetNode<GlobalGameStateManager>($"/root/{nameof(GlobalGameStateManager)}");
     }
 }

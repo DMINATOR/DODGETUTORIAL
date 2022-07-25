@@ -17,7 +17,10 @@ public class GameplayData
 
 public class PersistedData
 {
-    // Music volume, expected in range -80..20, default = 0
+    // Music volume, expected in range -80..0, default = 0
     public int MusicVolumeInDb = 0;
+
+    // Music volume, expected in range -80..0, default = 0
+    public int SoundVolumeInDb = 0;
 }
 

@@ -3,12 +3,17 @@ using Godot;
 /// <summary>
 /// 
 /// See: https://docs.godotengine.org/en/stable/tutorials/audio/audio_streams.html
+/// 
+/// https://docs.godotengine.org/en/stable/tutorials/audio/audio_buses.html
 /// </summary>
 public class GlobalAudioManager : Node
 {
     // Folders to store child nodes
     Node _musicFolder;
     Node _soundsFolder;
+
+    private int _musicAudioBus = 0;
+    private int _soundAudioBus = 1;
 
     [Export]
     public PackedScene AudioMusicScene;
@@ -20,13 +25,44 @@ public class GlobalAudioManager : Node
     {
         _musicFolder = GetNode<Node>("Music");
         _soundsFolder = GetNode<Node>("Sounds");
+
+        CreateAudio();
+    }
+
+    private void CreateAudio()
+    {
+        if( AudioServer.BusCount == 1 )
+        {
+            GD.Print($"{nameof(GlobalAudioManager)}-{nameof(CreateAudio)} = {AudioServer.BusCount}");
+
+            // first load
+            AudioServer.AddBus(0); // index = 0
+            AudioServer.SetBusName(_soundAudioBus, nameof(_soundAudioBus));
+
+            AudioServer.AddBus(0); // index = 1
+            AudioServer.SetBusName(_musicAudioBus, nameof(_musicAudioBus));
+
+            GD.Print($"{nameof(GlobalAudioManager)}-{nameof(CreateAudio)} = {AudioServer.BusCount} DONE ");
+        }
+
+    }
+
+    public void UpdateAudioLevels(PersistedData data)
+    {
+        CreateAudio();
+
+        GD.Print($"{nameof(GlobalAudioManager)}-Music = {AudioServer.GetBusVolumeDb(_musicAudioBus) } -> {data.MusicVolumeInDb}");
+
+        AudioServer.SetBusVolumeDb(_musicAudioBus, data.MusicVolumeInDb);
+        AudioServer.SetBusVolumeDb(_soundAudioBus, data.SoundVolumeInDb);
     }
 
     public void PlaySound(AudioStream audioStream)
     {
         var newSound = new AudioStreamPlayer
         {
-            Stream = audioStream
+            Stream = audioStream,
+            Bus = nameof(_soundAudioBus)
         };
 
         // Add child
@@ -50,7 +86,7 @@ public class GlobalAudioManager : Node
         _musicFolder.AddChild(_currentMusic);
 
         // Start playing
-        _currentMusic.FadeInAndPlay(audioStream);
+        _currentMusic.FadeInAndPlay(audioStream, nameof(_musicAudioBus));
     }
 
     public void OnAudioMusicFadeOutCallback(AudioMusicFadeOutMode fadeOutMode, AudioMusic instance)
